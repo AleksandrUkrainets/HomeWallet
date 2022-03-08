@@ -1,0 +1,40 @@
+﻿@page "/updateOperation/{id}"
+<h2>Update Operation</h2>
+@if (_operation != null)
+{
+    <EditForm Model="_operation" OnValidSubmit="UpdateAsync" class="card card-body bg-light mt-5">
+        <DataAnnotationsValidator />
+        <div class="form-group row">
+            <label for="date" class="col-md-2 col-form-label">Date:</label>
+            <div class="col-md-10">
+                <InputDate id="date" class="form-control" @bind-Value="_operation.Date"></InputDate>
+                <ValidationMessage For="@(() => _operation.Date)" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="amount" class="col-md-2 col-form-label">Amount:</label>
+            <div class="col-md-10">
+                <InputNumber id="amount" class="form-control" @bind-Value="_operation.Amount"></InputNumber>
+                <ValidationMessage For="@(() => _operation.Amount)" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Select category" class="col-md-2 col-form-label">Category:</label>
+            <div class="col-md-10">
+                <InputSelect class="form-control" id="Select category" @bind-Value="_selectedId">
+                    <option class="dropdown-item" value="@_operation.Category.Id">@_operation.Category.Name</option>
+                    @foreach (var category in _categories.Where(x => x.Name != _operation.Category.Name))
+                    {
+                    <option class="dropdown-item" value="@category.Id">@category.Name</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="reset" class="btn btn-danger" @onclick="Back">Back</button>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </div>
+    </EditForm>
+}

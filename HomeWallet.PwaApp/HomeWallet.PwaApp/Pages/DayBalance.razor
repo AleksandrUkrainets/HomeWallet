@@ -1,0 +1,20 @@
+﻿@page "/dayBalance"
+@using HomeWallet.PwaApp.Tables
+@using HomeWallet.PwaApp.Models
+<h3>Operation report by day</h3>
+<EditForm Model="DayBalanceModel">
+    <div class="form-group row">
+        <label for="date" class="col-md-2 col-form-label">Date:</label>
+        <div class="col-md-10">
+            <InputDate id="date" @bind-Value="DayBalanceModel.Date"></InputDate>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-primary" @onclick="() => GetReport()">GetReport</button>
+        </div>
+    </div>
+    <div class="row p-3">
+        <BalanceTable BalanceTableModel="DayBalanceModel.BalanceTable"/>
+    </div>
+</EditForm>

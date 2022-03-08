@@ -1,0 +1,17 @@
+﻿@page "/categories"
+@using HomeWallet.PwaApp.Tables
+
+<div class="row">
+    <div class="col-9">
+        <h3>Categories</h3>
+    </div>
+    <a class="btn btn-primary" href="/createCategory">Create category</a>
+</div>
+<div class="row p-3">
+    <CategoryTable Categories="CategoriesPwa" OnDeleted="DeleteCategory" />
+</div>
+<div class="row">
+    <div class="col">
+        <Pagination MetaData="MetaData" Spread="2" SelectedPage="SelectedPage" />
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿@using System.Globalization
+@if (BalanceTableModel?.Operations != null && BalanceTableModel.Operations.Count > 0)
+{
+    decimal balance = BalanceTableModel.TotalAmount.IncomeAmount + BalanceTableModel.TotalAmount.ExpenseAmount;
+    string totalColor = balance > 0 ? _incomeColor : _expenseColor;
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="width: 33.33%">Total Income</th>
+                <th scope="col" style="width: 33.33%">Total Expense</th>
+                <th scope="col" style="width: 33.33%">Total Balance</th>
+            </tr>
+        </thead>
+        <tr>
+            <td class="align-middle" style="background-color: @_incomeColor">@BalanceTableModel.TotalAmount.IncomeAmount</td>
+            <td class="align-middle" style="background-color: @_expenseColor">@BalanceTableModel.TotalAmount.ExpenseAmount</td>
+            <td class="align-middle" style="background-color: @totalColor">@balance</td>
+        </tr>
+    </table>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 33.33%">Date</th>
+                <th scope="col" style="width: 33.33%">Amount</th>
+                <th scope="col" style="width: 33.33%">Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <Virtualize Items="@BalanceTableModel.Operations" Context="operation">
+                <tr style="background-color:@(operation.Category.CategoryType == (int)Models.CategoryTypePwa.Income ? _incomeColor : _expenseColor)">
+                    <td class="align-middle">
+                        @operation.Date.ToString("d", CultureInfo.InvariantCulture)
+                    </td>
+                    <td class="align-middle">
+                        @(operation.Category.CategoryType == (int)Models.CategoryTypePwa.Income ? operation.Amount.ToString() : $"{operation.Amount}")
+                    </td>
+                    <td class="align-middle">
+                        @operation.Category.Name
+                    </td>
+                </tr>
+            </Virtualize>
+        </tbody>
+    </table>
+}
+else
+{
+    <span>
+        @BalanceTableModel.Message
+    </span>
+}

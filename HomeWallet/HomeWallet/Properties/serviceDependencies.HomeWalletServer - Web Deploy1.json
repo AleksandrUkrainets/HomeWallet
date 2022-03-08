@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/hw-db-server/databases/HW_DB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:HWConnectionString"
+    }
+  }
+}

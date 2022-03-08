@@ -1,0 +1,46 @@
+﻿@if (Categories.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">OperationType</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Categories)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @category.Id
+                    </td>
+                    <td class="align-middle">
+                        @category.Name
+                    </td>
+                    <td class="align-middle">
+                        @category.Description
+                    </td>
+                    <td class="align-middle">
+                        @((Models.CategoryTypePwa)category.CategoryType)
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-info" @onclick="() => RedirectToUpdate(category.Id)">Update</button>
+                    </td>
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-danger" @onclick="() => Delete(category.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <span>
+        There are not data.
+    </span>
+}
